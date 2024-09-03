@@ -1,0 +1,96 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page pb-5">
+  <!-- Start Content-->
+  <div class="container">
+    <!-- start page title -->
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item"><a href="javascript: void(0);">Xtensus</a></li>
+              <li class="breadcrumb-item"><a href="javascript: void(0);">Liste</a></li>
+              <li class="breadcrumb-item active">Devises</li>
+            </ol>
+            <div class="row mb-3">
+              <div class="col-12">
+                <a [routerLink]="['/createDevises']">
+                  <button class="btn btn-success" title="Cliquez ici pour ajouter">
+                    <i class="fas fa-plus"></i> Ajouter
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <h4 class="page-title">Devises</h4>
+        </div>
+      </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-box">
+          <form>
+            <div class="col-sm-3 ms-auto mb-4">
+              <input type="text" [(ngModel)]="libelleFilter" class="form-control" name="search" (input)="filterByLibelle()" placeholder="Recherche">
+            </div>
+          </form>
+          <div class="table-rep-plugin">
+            <div class="table-responsive mb-0" data-pattern="priority-columns">
+              <table id="tech-companies-1" class="table table-striped mb-0">
+                <thead>
+                <tr>
+                  <th (click)="onSort('devisesLibelle')" [class.sorted]="sortColumn === 'devisesLibelle'">
+                    Devise
+                    <i [ngClass]="sortColumn === 'devisesLibelle' ? (sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down') : 'fas fa-sort'"></i>
+                  </th>
+                  <th (click)="onSort('devisesAcronyme')" [class.sorted]="sortColumn === 'devisesAcronyme'">
+                    Acronyme
+                    <i [ngClass]="sortColumn === 'devisesAcronyme' ? (sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down') : 'fas fa-sort'"></i>
+                  </th>
+                  <th class="actions-column">Action</th>
+                </tr>
+                </thead>
+                <tbody *ngIf="devisesList$ | async as devises">
+                <tr *ngFor="let devise of devises">
+                  <td>{{ devise.devisesLibelle }}</td>
+                  <td>{{ devise.devisesAcronyme }}</td>
+                  <td class="actions-column">
+                    <div class="actions-buttons">
+                      <a [routerLink]="['/updateDevises', devise.devisesId]">
+                        <button class="btn btn-primary btn-sm" title="Cliquez ici pour modifier">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                      </a>
+                      <button class="btn btn-danger btn-sm" (click)="deleteById(devise.devisesId)" title="Cliquez ici pour supprimer">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-between p-2">
+                <ngb-pagination
+                  [(page)]="page"
+                  [pageSize]="pageSize"
+                  [collectionSize]="collectionSize"
+                  (pageChange)="onPageChange()">
+                </ngb-pagination>
+                <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
+                  <option [ngValue]="10">10</option>
+                  <option [ngValue]="15">15</option>
+                  <option [ngValue]="20">20</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container-fluid -->
+</div>

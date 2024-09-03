@@ -1,0 +1,90 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page pb-5">
+  <!-- Start Content-->
+  <div class="container">
+    <!-- start page title -->
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item"><a href="javascript: void(0);">Xtensus</a></li>
+              <li class="breadcrumb-item"><a href="javascript: void(0);">Liste</a></li>
+              <li class="breadcrumb-item active">Nature Client</li>
+            </ol>
+            <div class="row mb-3">
+              <div class="col-12">
+                <a [routerLink]="['/createNatureClient']">
+                  <button class="btn btn-success" title="Cliquez ici pour ajouter">
+                    <i class="fas fa-plus"></i> Ajouter
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <h4 class="page-title">Nature Client</h4>
+        </div>
+      </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-box">
+          <form>
+            <div class="col-sm-3 ms-auto mb-4">
+              <input type="text" [(ngModel)]="libelleFilter" class="form-control" name="search" (input)="filterByLibelle()" placeholder="Recherche">
+            </div>
+          </form>
+          <div class="table-rep-plugin">
+            <div class="table-responsive mb-0" data-pattern="priority-columns">
+              <table id="tech-companies-1" class="table table-striped mb-0">
+                <thead>
+                <tr>
+                  <th (click)="setSortColumn('natureClientLibelle')" class="libelle-column">Nature Client <span [class]="sortColumn === 'natureClientLibelle' ? (sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down') : 'fas fa-sort'"></span></th>
+                  <th (click)="setSortColumn('natureClientDescription')" class="description-column">Description <span [class]="sortColumn === 'natureClientDescription' ? (sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down') : 'fas fa-sort'"></span></th>
+                  <th class="actions-column">Action</th>
+                </tr>
+                </thead>
+                <tbody *ngIf="natures$ | async as natures">
+                <tr *ngFor="let nature of natures">
+                  <td class="libelle-column">{{ nature.natureClientLibelle }}</td>
+                  <td class="description-column">{{ nature.natureClientDescription }}</td>
+                  <td class="actions-column">
+                    <div class="actions-buttons">
+                      <a [routerLink]="['/putNatureClient', nature.id]">
+                        <button class="btn btn-primary btn-sm" title="Cliquez ici pour modifier">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                      </a>
+                      <button class="btn btn-danger btn-sm" title="Cliquez ici pour supprimer" (click)="deleteNatureById(nature.id)">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-between p-2">
+                <ngb-pagination
+                  [(page)]="page"
+                  [pageSize]="pageSize"
+                  [collectionSize]="collectionSize"
+                  (pageChange)="onPageChange()">
+                </ngb-pagination>
+                <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshNatures()">
+                  <option [ngValue]="10">10</option>
+                  <option [ngValue]="15">15</option>
+                  <option [ngValue]="20">20</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container-fluid -->
+</div>

@@ -1,0 +1,73 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Xtensus</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Détails</a></li>
+                            <li class="breadcrumb-item active">CV</li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Détails CV</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-box mt-30">
+            <h2>Détails CV</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>Nom:</strong></td>
+                            <td>{{ employe?.employeNom }}</td>
+                            <td><strong>Prénom:</strong></td>
+                            <td>{{ employe?.employePrenom }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Date de naissance:</strong></td>
+                          <td>{{ employe?.employeDateNaissance }}</td>
+                          <td><strong>Date lieu de naissance:</strong></td>
+                          <td>{{ employe?.employeLieuNaissance }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Adresse:</strong></td>
+                            <td>{{ employe?.employeAdresse }}</td>
+                            <td><strong>Principale Qualification:</strong></td>
+                            <td>{{ employe?.employePrincipaleQualification }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Formation autre:</strong></td>
+                            <td>{{ employe?.employeFormationAutre }}</td>
+                            <td><strong>Affiliation Des Associations Group Pro:</strong></td>
+                            <td>{{ employe?.employeAffiliationDesAssociationsGroupPro }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Poste:</strong></td>
+                            <td>{{ employe?.employePoste ? employe.employePoste : 'Null' }}</td>
+                            <td><strong>Situation Familiale:</strong></td>
+                            <td>{{ employe?.situationFamiliale ? employe.situationFamiliale : 'Null' }}</td>
+                        </tr>
+                        <tr *ngIf="employe.employeRemarque">
+                          <td><strong>Remarque:</strong></td>
+                          <td colspan="3">{{ employe?.employeRemarque ? employe.employeRemarque : 'Null' }}</td>
+                        </tr>
+                    </tbody>
+                    <div class="row mt-3">
+                        <div class="col-lg-12">
+                            <a [routerLink]="['/getEmploye']" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Retour
+                            </a>
+                        </div>
+                    </div>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</div>

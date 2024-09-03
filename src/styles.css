@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+@import '~primeng/resources/themes/saga-blue/theme.css'; /* Or another theme */
+@import '~primeng/resources/primeng.min.css';
+@import '~primeicons/primeicons.css';
+
+body {
+    background-color: #F8F8F8;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.table-rep-plugin .table-responsive table th.description-column,
+.table-rep-plugin .table-responsive table td.description-column {
+  width: 550px;  /* Adjust the width as needed */
+  word-wrap: break-word;  /* Ensure long text wraps within the cell */
+}
+
+.table-rep-plugin .table-responsive table th.libelle-column,
+.table-rep-plugin .table-responsive table td.libelle-column {
+  width: 300px;  /* Adjust the width as needed */
+  word-wrap: break-word;  /* Ensure long text wraps within the cell */
+}
+
+th {
+  cursor: pointer;
+}
+
+th .fas {
+  margin-left: 5px;
+  font-size: 0.9em;
+  color: #6c757d;
+}
+
+th .fas.fa-sort {
+  visibility: hidden;
+}
+
+th:hover .fas.fa-sort {
+  visibility: visible;
+}
+
+th .fas.fa-sort-up,
+th .fas.fa-sort-down {
+  visibility: visible;
+}
+
+
+.ck-editor__editable_inline {
+  min-height: 200px;
+}
+
+
+/* Ensure the action column width fits its content */
+.actions-column {
+  white-space: nowrap;
+  width: 1%;
+}
+
+/* Make sure buttons stay inline */
+.actions-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 5px; /* Space between buttons */
+}
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+<div id="app">
+    <app-sidebar></app-sidebar>
+  
+    <div class="content-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Fichier</a></li>
+                                <li class="breadcrumb-item active">Ajouter</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Ajouter un fichier</h4>
+                    </div>
+                </div>
+            </div>
+  
+            <div class="row">
+    
+                    <div class="card-box">
+
+    <div class="form-group">
+      <label for="fileInput">choisir fichier</label>
+      <input type="file" id="fileInput" class="form-control" (change)="onFileSelected($event)">
+    </div>
+    <div class="form-group">
+      <label for="preuveProjetSelect">preuve de projet</label>
+      <select id="preuveProjetSelect" class="form-control" [(ngModel)]="selectedProjetPreuveId">
+        <option *ngFor="let projetPreuve of projetPreuves" [value]="projetPreuve.projetPreuveId">
+          {{ projetPreuve.projetPreuveLibelle }} <!-- Assurez-vous d'avoir une propriété 'name' ou remplacez-la par la propriété correcte -->
+        </option>
+      </select>
+    </div>
+    <button class="btn btn-success mt-3" (click)="onUpload()">Créer</button>
+  
+    <div *ngIf="uploadProgress > 0" class="mt-3">
+      <progress [value]="uploadProgress" max="100"></progress>
+      <span>{{ uploadProgress }}%</span>
+    </div>
+  
+    <div *ngIf="uploadMessage" class="mt-3 alert" [ngClass]="{'alert-success': uploadMessage === 'File successfully uploaded!', 'alert-danger': uploadMessage === 'File upload failed!'}">
+      <p>{{ uploadMessage }}</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,105 @@
+<app-sidebar></app-sidebar>
+
+<app-sidebar></app-sidebar>
+
+<div class="content-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Xtensus</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Détails</a></li>
+                            <li class="breadcrumb-item active">Référence</li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Détails de la Référence</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-box mt-30">
+            <h2>Détails de la Référence</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>Référence:</strong></td>
+                            <td>{{ reference.referenceRef }}</td>
+                            <td><strong>Titre:</strong></td>
+                            <td>{{ reference.referenceTitre }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Libellé:</strong></td>
+                            <td>{{ reference.referenceLibelle }}</td>
+                            <td><strong>URL Fonctionnel:</strong></td>
+                            <td>{{ reference.referenceUrlFonctionnel }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Durée:</strong></td>
+                            <td>{{ reference.referenceDuree }}</td>
+                            <td><strong>Date Début:</strong></td>
+                            <td>{{ reference.referenceDateDemarrage }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Date Achèvement:</strong></td>
+                            <td>{{ reference.referenceDateAchevement }}</td>
+                            <td><strong>Année Achèvement:</strong></td>
+                            <td>{{ reference.referenceAnneeAchevement }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Date Réception Provisoire:</strong></td>
+                            <td>{{ reference.referenceDateReceptionProvisoire }}</td>
+                            <td><strong>Date Réception Définitive:</strong></td>
+                            <td>{{ reference.referenceDateReceptionDefinitive }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lieu :</strong></td>
+                            <td>{{ reference.lieuId }}</td>
+                            <td><strong>Catégorie :</strong></td>
+                            <td>{{reference.categorie }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Client :</strong></td>
+                            <td>{{ reference.clientId }}</td>
+                            <td><strong>Devise :</strong></td>
+                            <td>{{reference.deviseId }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Caractéristiques:</strong></td>
+                            <td>{{ reference.referenceCaracteristiques }}</td>
+                            <td><strong>Description:</strong></td>
+                            <td [innerHTML]="reference.referenceDescription"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Description Services Rendus:</strong></td>
+                            <td [innerHTML]="reference.referenceDescriptionServiceEffectivemenetRendus"></td>
+                            <td><strong>Durée Garantie:</strong></td>
+                            <td>{{ reference.referenceDureeGarantie }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Budget:</strong></td>
+                            <td>{{ reference.referenceBudget }}</td>
+                            <td><strong>Part Budget Groupement:</strong></td>
+                            <td>{{ reference.referencePartBudgetGroupement }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Remarque:</strong></td>
+                            <td colspan="3" [innerHTML]="reference.referenceRemarque"></td>
+                        </tr>
+
+                    </tbody>
+
+                    <div class="row mt-3">
+                        <div class="col-lg-12">
+                            <a [routerLink]="['/getReference']" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Retour
+                            </a>
+                        </div>
+                    </div>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

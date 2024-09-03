@@ -1,0 +1,103 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page">
+  <!-- Start Content-->
+  <div class="container pb-5">
+    <!-- start page title -->
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item"><a href="javascript: void(0);">Xtensus</a></li>
+              <li class="breadcrumb-item"><a href="javascript: void(0);">Liste</a></li>
+              <li class="breadcrumb-item active">Référence Document</li>
+            </ol>
+            <div class="row mb-3">
+              <div class="col-12">
+                <a [routerLink]="['/createReferenceDocument']">
+                  <button class="btn btn-success" title="Cliquez ici pour ajouter">
+                    <i class="fas fa-plus"></i> Ajouter
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <h4 class="page-title">Référence Document</h4>
+        </div>
+      </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-box">
+          <form>
+            <div class="mb-4 row align-items-center">
+              <label for="ref-filter" class="col-sm-2 col-form-label">Filtrer</label>
+              <div class="col-sm-3">
+                <input type="text" [(ngModel)]="libelleFilter" class="form-control" name="search" (input)="filterByLibelle()" placeholder=" par référence document...">
+              </div>
+            </div>
+          </form>
+          <div class="table-rep-plugin">
+            <div class="table-responsive mb-0" data-pattern="priority-columns">
+              <table id="reference-documents-table" class="table table-striped mb-0">
+                <thead>
+                <tr>
+                  <th class="libelle-column" (click)="onSort('referenceDocumentsLibelle')" [class.sorted]="sortColumn === 'referenceDocumentsLibelle'">
+                    Référence document
+                    <i [ngClass]="sortColumn === 'referenceDocumentsLibelle' ? (sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down') : 'fas fa-sort'"></i>
+                  </th>
+                  <th class="libelle-column" (click)="onSort('referenceLibelle')" [class.sorted]="sortColumn === 'referenceLibelle'">
+                    Référence
+                    <i [ngClass]="sortColumn === 'referenceLibelle' ? (sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down') : 'fas fa-sort'"></i>
+                  </th>
+                  <th class="libelle-column" (click)="onSort('typeDocLibelle')" [class.sorted]="sortColumn === 'typeDocLibelle'">
+                    Type de document
+                    <i [ngClass]="sortColumn === 'typeDocLibelle' ? (sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down') : 'fas fa-sort'"></i>
+                  </th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody *ngIf="refs$ | async as refs">
+                <tr *ngFor="let ref of refs">
+                  <td>{{ ref.referenceDocumentsLibelle }}</td>
+                  <td>{{ ref.referenceLibelle }}</td>
+                  <td>{{ ref.typeDocLibelle }}</td>
+                  <td>
+                    <a [routerLink]="['/updateReferenceDocument', ref.referenceDocumentsId]">
+                      <button class="btn btn-primary btn-sm ms-2" title="Cliquez ici pour modifier">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                    </a>
+                    <button class="btn btn-danger btn-sm ms-2" (click)="deleteRefById(ref.referenceDocumentsId)" title="Cliquez ici pour supprimer">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-between p-2">
+                <ngb-pagination
+                  [(page)]="page"
+                  [pageSize]="pageSize"
+                  [collectionSize]="collectionSize"
+                  (pageChange)="onPageChange()">
+                </ngb-pagination>
+                <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshPays()">
+                  <option [ngValue]="10">10 lignes par page</option>
+                  <option [ngValue]="15">15 lignes par page</option>
+                  <option [ngValue]="20">20 lignes par page</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container-fluid -->
+</div>

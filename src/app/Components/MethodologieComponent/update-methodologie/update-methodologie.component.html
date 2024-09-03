@@ -1,0 +1,57 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page">
+  <!-- Start Content-->
+  <div class="container">
+    <!-- Start Page Title -->
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Liste</a></li>
+              <li class="breadcrumb-item active">Méthodologie</li>
+            </ol>
+          </div>
+          <h4 class="page-title">Méthodologie</h4>
+        </div>
+      </div>
+    </div>
+    <!-- End Page Title -->
+
+    <!-- Form Section -->
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-box">
+          <form [formGroup]="methodologieForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+            <div class="form-group row">
+              <label for="methodologieLibelle" class="col-md-2 control-label">Méthodologie <span class="text-danger">*</span></label>
+              <div class="col-md-10">
+                <input type="text" class="form-control" id="methodologieLibelle" formControlName="methodologieLibelle" maxlength="254">
+                <div *ngIf="formSubmitted && !methodologieForm.get('methodologieLibelle')?.valid" class="text-danger">Ce champ est requis.</div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="methodologieDescription" class="col-md-2 control-label">Description</label>
+              <div class="col-md-10">
+                <textarea class="form-control" id="methodologieDescription" formControlName="methodologieDescription" maxlength="254"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-10 offset-md-2">
+                <button class="btn width-md btn-bordered margin-btn btn-success waves-effect waves-light me-2" type="submit">Modifier</button>
+                <a [routerLink]="['/methodologie']">
+                  <button class="btn btn-danger text-left btn-ml" type="button">Retour</button>
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Container -->
+</div>

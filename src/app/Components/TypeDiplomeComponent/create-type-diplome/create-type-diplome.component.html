@@ -1,0 +1,50 @@
+<div id="app">
+  <app-sidebar></app-sidebar>
+
+  <div class="content-page">
+    <div class="container">
+      <!-- Start Page Title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box">
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Type diplôme</a></li>
+                <li class="breadcrumb-item active">Ajouter</li>
+              </ol>
+            </div>
+            <h4 class="page-title">Ajouter type diplôme</h4>
+          </div>
+        </div>
+      </div>
+      <!-- End Page Title -->
+
+      <!-- Form Section -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card-box">
+            <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+              <div class="form-group row">
+                <label for="typeDiplomeLibelle" class="col-md-2 col-form-label">Type diplôme <span class="text-danger">*</span></label>
+                <div class="col-md-10">
+                  <input type="text" class="form-control" id="typeDiplomeLibelle" [(ngModel)]="formData.typeDiplomeLibelle" name="typeDiplomeLibelle" #typeDiplomeLibelle="ngModel" required maxlength="254">
+                  <div *ngIf="formSubmitted && typeDiplomeLibelle.invalid" class="text-danger">Ce champ est requis.</div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-10 offset-md-2">
+                  <button type="submit" class="btn width-md btn-bordered margin-btn btn-success waves-effect waves-light me-2">Créer</button>
+                  <a [routerLink]="['/typeDiplome']">
+                    <button class="btn btn-danger text-left btn-ml" type="button">Retour</button>
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

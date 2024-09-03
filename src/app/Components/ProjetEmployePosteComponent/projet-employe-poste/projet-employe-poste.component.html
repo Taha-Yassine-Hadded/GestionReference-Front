@@ -1,0 +1,99 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page">
+    <!-- Start Content-->
+    <div class="container">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Xtensus</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Liste</a></li>
+                            <li class="breadcrumb-item active">Projet Employe Poste</li>
+                        </ol>
+                        <div   class="row mb-3">
+                            <div class="col-12">
+                                <a [routerLink]="['/createProjetEmploye']">
+                                    <button class="btn btn-success" title="Cliquez ici pour ajouter">
+                                        <i class="fas fa-plus"></i> Ajouter
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="page-title">Projet Employe Poste</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+      
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card-box">
+                    <form>
+                        <div class="mb-4 row align-items-center">
+                            <label for="devis-filter" class="col-sm-2 col-form-label">Filtrer</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" [(ngModel)]="searchText" (input)="filterByNom()" placeholder="Filtrer par employé">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-rep-plugin">
+                        <div class="table-responsive mb-0" data-pattern="priority-columns">
+                           
+                            <table id="tech-companies-1" class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                   
+                                        <th data-priority="1">Duree</th>
+                                        <th data-priority="3">Poste </th>
+                                        <th data-priority="3">Employe </th>   
+                                        <th data-priority="3">Projet </th>
+                                        <th >Action</th>
+                                    </tr>
+                                </thead>
+                              
+                                  
+                                <tbody *ngIf="projetEmployePostes$ | async as projetEmployePoste">
+                                    <tr *ngFor="let projetEmployePoste of projetEmployePostes$ | async">
+                                    <td> {{ projetEmployePoste.duree }} </td>
+                                    <td> {{ projetEmployePoste.poste}} </td>
+                                    <td>{{ projetEmployePoste.employe }}</td>
+                                    <td>{{ projetEmployePoste.projet }}</td>
+                                    <td>
+                                        <a  [routerLink]="['/putEmployePoste', projetEmployePoste.id ]">
+                                            <button class="btn btn-primary btn-sm" title="Cliquez ici pour modifier">
+                                                <i class="fas fa-edit"></i> 
+                                            </button>
+                                        </a>
+                                        <button   class="btn btn-danger btn-sm"  title="Cliquez ici pour supprimer" (click)="deleteProjetEmployePoste(projetEmployePoste.id)" >
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-between p-2">
+                                <ngb-pagination
+                                    [(page)]="page"
+                                    [pageSize]="pageSize"
+                                    [collectionSize]="collectionSize"
+                                    (pageChange)="onPageChange()">
+                                </ngb-pagination>
+                                <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshProjetEmployePostes()">
+                                    <option [ngValue]="10">10 lignes par page</option>
+                                    <option [ngValue]="15">15 lignes par page</option>
+                                    <option [ngValue]="20">20 lignes par page</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container-fluid -->
+</div>

@@ -1,0 +1,28 @@
+.category-button {
+  border: 2px solid #adb5bd; /* Lighter grey border */
+  background-color: #adb5bd; /* Lighter grey background */
+  color: #ffffff; /* White text color for contrast */
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transitions */
+}
+
+.category-button.btn-light {
+  border: 2px solid #adb5bd; /* Lighter grey border */
+  background-color: #adb5bd; /* Lighter grey background */
+  color: #ffffff; /* White text color for contrast */
+}
+
+.category-button.btn-light:hover {
+  background-color: #6c757d; /* Darker grey on hover */
+  border-color: #adb5bd; /* Maintain border color */
+}
+
+.category-button.btn-primary {
+  background-color: #0056b3; /* Darker blue background for selected state */
+  color: white; /* White text for contrast */
+  border-color: #0056b3; /* Darker blue border for selected state */
+}
+
+.category-button.btn-primary:hover {
+  background-color: #004085; /* Even darker blue on hover */
+}
+

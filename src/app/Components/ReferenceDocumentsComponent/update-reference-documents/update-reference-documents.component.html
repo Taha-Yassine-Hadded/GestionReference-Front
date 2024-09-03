@@ -1,0 +1,76 @@
+<div id="app">
+  <app-sidebar></app-sidebar>
+
+  <div class="content-page">
+    <div class="container">
+      <!-- Start Page Title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box">
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Liste</a></li>
+                <li class="breadcrumb-item active">Référence Document</li>
+              </ol>
+            </div>
+            <h4 class="page-title">Référence document</h4>
+          </div>
+        </div>
+      </div>
+      <!-- End Page Title -->
+
+      <!-- Start Form Section -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card-box">
+            <form [formGroup]="refDocForm" (ngSubmit)="onSubmit()">
+              <!-- Référence Document Field -->
+              <div class="form-group row">
+                <label for="referenceDocumentsLibelle" class="col-md-2 col-form-label">Référence document<span class="text-danger">*</span></label>
+                <div class="col-md-10">
+                  <input type="text" class="form-control" id="referenceDocumentsLibelle" formControlName="referenceDocumentsLibelle">
+                  <div *ngIf="formSubmitted && refDocForm.get('referenceDocumentsLibelle')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                </div>
+              </div>
+
+              <!-- Référence Field -->
+              <div class="form-group row">
+                <label for="referenceID" class="col-md-2 col-form-label">Référence<span class="text-danger">*</span></label>
+                <div class="col-md-10">
+                  <select class="form-control" id="referenceID" formControlName="referenceID">
+                    <option *ngFor="let ref of references" [value]="ref.referenceID">{{ ref.referenceLibelle }}</option>
+                  </select>
+                  <div *ngIf="formSubmitted && refDocForm.get('referenceID')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                </div>
+              </div>
+
+              <!-- Type de Document Field -->
+              <div class="form-group row">
+                <label for="typeDocumentId" class="col-md-2 col-form-label">Type de document<span class="text-danger">*</span></label>
+                <div class="col-md-10">
+                  <select class="form-control" id="typeDocumentId" formControlName="typeDocumentId">
+                    <option *ngFor="let type of types" [value]="type.typeDocumentId">{{ type.typeDocumentLibelle }}</option>
+                  </select>
+                  <div *ngIf="formSubmitted && refDocForm.get('typeDocumentId')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                </div>
+              </div>
+
+              <!-- Buttons -->
+              <div class="form-group row">
+                <div class="col-md-10 offset-md-2">
+                  <button class="btn width-md btn-bordered margin-btn btn-success waves-effect waves-light me-2" type="submit">Modifier</button>
+                  <a [routerLink]="['/referenceDocuments']">
+                    <button class="btn btn-danger text-left btn-ml" type="button">Retour</button>
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- End Form Section -->
+    </div>
+    <!-- End Container -->
+  </div>
+</div>

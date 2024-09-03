@@ -1,0 +1,139 @@
+<div id="app">
+  <app-sidebar></app-sidebar>
+
+  <div class="content-page pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box">
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Client</a></li>
+                <li class="breadcrumb-item active">Modifier</li>
+              </ol>
+            </div>
+            <h4 class="page-title">Modifier Client</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Column 1 -->
+        <div class="col-lg-6">
+          <div class="card-box">
+            <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="form-group">
+                  <label for="clientRaisonSocial">Raison Sociale<span class="text-danger">*</span></label>
+                  <input type="text" id="clientRaisonSocial" formControlName="clientRaisonSocial" class="form-control">
+                  <div *ngIf="submitButtonClicked && clientForm.get('clientRaisonSocial')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                </div>
+
+                <div class="form-group">
+                  <label for="clientRaisonSocialShort">Raison Sociale (Courte)<span class="text-danger">*</span></label>
+                  <input type="text" id="clientRaisonSocialShort" formControlName="clientRaisonSocialShort" class="form-control">
+                  <div *ngIf="submitButtonClicked && clientForm.get('clientRaisonSocialShort')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                </div>
+
+                <div class="form-group">
+                  <label for="clientAdresse">Adresse<span class="text-danger">*</span></label>
+                  <input type="text" id="clientAdresse" formControlName="clientAdresse" class="form-control">
+                  <div *ngIf="submitButtonClicked && clientForm.get('clientAdresse')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                </div>
+
+                <div class="form-group">
+                  <label for="clientTelephone1">Téléphone 1<span class="text-danger">*</span></label>
+                  <input type="text" id="clientTelephone1" formControlName="clientTelephone1" class="form-control">
+                  <div *ngIf="submitButtonClicked && clientForm.get('clientTelephone1')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                  <div *ngIf="submitButtonClicked && clientForm.get('clientTelephone1')?.hasError('pattern')" class="text-danger">Veuillez saisir un numéro valide.</div>
+                </div>
+
+                <div class="form-group">
+                  <label for="clientTelephone2">Téléphone 2</label>
+                  <input type="text" id="clientTelephone2" formControlName="clientTelephone2" class="form-control">
+                  <div *ngIf="submitButtonClicked && clientForm.get('clientTelephone2')?.hasError('pattern')" class="text-danger">Veuillez saisir un numéro valide.</div>
+                </div>
+
+                <div class="form-group">
+                  <label for="clientTelephone3">Téléphone 3</label>
+                  <input type="text" id="clientTelephone3" formControlName="clientTelephone3" class="form-control">
+                  <div *ngIf="submitButtonClicked && clientForm.get('clientTelephone3')?.hasError('pattern')" class="text-danger">Veuillez saisir un numéro valide.</div>
+                </div>
+
+                <div class="form-group">
+                  <label for="clientEmail">Email<span class="text-danger">*</span></label>
+                  <input type="email" id="clientEmail" formControlName="clientEmail" class="form-control">
+                  <div *ngIf="submitButtonClicked && clientForm.get('clientEmail')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                  <div *ngIf="submitButtonClicked && clientForm.get('clientEmail')?.errors?.['email']" class="text-danger">Veuillez saisir une adresse email valide.</div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="col-lg-6">
+          <div class="card-box">
+            <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="clientPersonneContact1">Personne Contact 1<span class="text-danger">*</span></label>
+                <input type="text" id="clientPersonneContact1" formControlName="clientPersonneContact1" class="form-control">
+                <div *ngIf="submitButtonClicked && clientForm.get('clientPersonneContact1')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+              </div>
+
+              <div class="form-group">
+                <label for="clientPersonneContact2">Personne Contact 2</label>
+                <input type="text" id="clientPersonneContact2" formControlName="clientPersonneContact2" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label for="clientPersonneContact3">Personne Contact 3</label>
+                <input type="text" id="clientPersonneContact3" formControlName="clientPersonneContact3" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label for="natureClientId">Nature du client<span class="text-danger">*</span></label>
+                <select id="natureClientId" formControlName="natureClientId" class="form-control">
+                  <option value="" disabled selected>Sélectionner une nature de client</option>
+                  <option *ngFor="let natureClient of natureClients" [value]="natureClient.id">
+                    {{ natureClient.natureClientLibelle }}
+                  </option>
+                </select>
+                <div *ngIf="submitButtonClicked && clientForm.get('natureClientId')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+              </div>
+
+              <div class="form-group">
+                <label for="paysId">Pays<span class="text-danger">*</span></label>
+                <select id="paysId" formControlName="paysId" class="form-control">
+                  <option value="" disabled selected>Sélectionner un pays</option>
+                  <option *ngFor="let pays of pays" [value]="pays.paysId">
+                    {{ pays.paysLibelle }}
+                  </option>
+                </select>
+                <div *ngIf="submitButtonClicked && clientForm.get('paysId')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+              </div>
+
+              <div class="form-group">
+                <label for="secteurs">Secteurs d'activité<span class="text-danger">*</span></label>
+                <select id="secteurs" formControlName="secteurs" class="form-control" multiple>
+                  <option *ngFor="let secteur of secteurs" [value]="secteur.secteurActiviteId">
+                    {{ secteur.secteurActiviteLibelle }}
+                  </option>
+                </select>
+                <div *ngIf="submitButtonClicked && clientForm.get('secteurs')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn width-md btn-bordered margin-btn btn-success waves-effect waves-light">Modifier</button>
+                <a [routerLink]="['/getClient']">
+                  <button class="btn btn-danger text-left btn-ml" type="button">Retour</button>
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

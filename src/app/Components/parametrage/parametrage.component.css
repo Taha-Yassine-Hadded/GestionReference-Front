@@ -1,0 +1,46 @@
+.menu-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  background-color: white;
+  color: #525255;
+  font-size: 24px;
+  text-align: center;
+  margin: 15px;
+  cursor: pointer;
+}
+
+.menu-box:hover {
+  background-color: #dcd8d8;
+  transform: translateX(3px);
+  transition-duration: 0.3s;
+}
+
+.menu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow-y: auto;  /* Enable vertical scrolling */
+  padding-bottom: 50px;
+}
+
+.menu-box i {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.content-page {
+  height: 100vh;  /* Ensure full viewport height */
+  overflow-y: auto;  /* Enable scrolling */
+  padding-bottom: 20px;
+}
+
+.container {
+  min-height: 100%;  /* Allow content to expand */
+  display: flex;
+  flex-direction: column;
+}

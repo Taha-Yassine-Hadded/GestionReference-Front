@@ -1,0 +1,84 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item"><a href="javascript: void(0);">Xtensus</a></li>
+              <li class="breadcrumb-item"><a href="javascript: void(0);">Détail</a></li>
+              <li class="breadcrumb-item active">Client</li>
+            </ol>
+          </div>
+          <h4 class="page-title">Détails du client</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-box mt-3">
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+          <tr>
+            <td><strong>Raison sociale:</strong></td>
+            <td>{{ client?.clientRaisonSocial || 'non spécifié' }}</td>
+            <td><strong>Raison sociale (Short):</strong></td>
+            <td>{{ client?.clientRaisonSocialShort || 'non spécifié' }}</td>
+          </tr>
+          <tr>
+            <td><strong>Adresse:</strong></td>
+            <td>{{ client?.clientAdresse || 'non spécifié' }}</td>
+            <td><strong>Téléphone 1:</strong></td>
+            <td>{{ client?.clientTelephone1 || 'non spécifié' }}</td>
+          </tr>
+          <tr>
+            <td><strong>Téléphone 2:</strong></td>
+            <td>{{ client?.clientTelephone2 || 'non spécifié' }}</td>
+            <td><strong>Téléphone 3:</strong></td>
+            <td>{{ client?.clientTelephone3 || 'non spécifié' }}</td>
+          </tr>
+          <tr>
+            <td><strong>Email:</strong></td>
+            <td>{{ client?.clientEmail || 'non spécifié' }}</td>
+            <td><strong>Personne de contact 1:</strong></td>
+            <td>{{ client?.clientPersonneContact1 || 'non spécifié' }}</td>
+          </tr>
+          <tr>
+            <td><strong>Personne de contact 2:</strong></td>
+            <td>{{ client?.clientPersonneContact2 || 'non spécifié' }}</td>
+            <td><strong>Personne de contact 3:</strong></td>
+            <td>{{ client?.clientPersonneContact3 || 'non spécifié' }}</td>
+          </tr>
+          <tr>
+            <td><strong>Nature du client:</strong></td>
+            <td>{{ client?.natureClient || 'non spécifié' }}</td>
+            <td><strong>Pays:</strong></td>
+            <td>{{ client?.paysClient || 'non spécifié' }}</td>
+          </tr>
+          <tr>
+            <td><strong>Secteurs d'activité:</strong></td>
+            <td colspan="3">
+              <p>
+                <span *ngFor="let secteur of client?.secteurs; let last = last">
+                  {{ secteur.secteur }}<ng-container *ngIf="!last">,&nbsp;</ng-container>
+                  <ng-container *ngIf="last">.</ng-container>
+                </span>
+              </p>
+            </td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <a [routerLink]="['/getClient']" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Retour
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

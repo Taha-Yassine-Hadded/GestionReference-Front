@@ -1,0 +1,67 @@
+<div id="app">
+    <app-sidebar></app-sidebar>
+  
+    <div class="content-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Employe Exprience</a></li>
+                                <li class="breadcrumb-item active">Ajouter</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Ajouter experience à un employé</h4>
+                    </div>
+                </div>
+            </div>
+  
+            <div class="row">
+    
+                    <div class="card-box">
+  
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="employeExperiencePoste">Poste :</label>
+       
+          <input type="text" class="form-control" id="employeExperiencePoste" [(ngModel)]="formData.employeExperiencePoste" name="employeExperiencePoste" required>
+          <div *ngIf="formSubmitted && !formData.employeExperiencePoste" class="text-danger">ce champ est requis.</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="employeExperienceOragnismeEmployeur">Oragnisme Employeur:</label>
+          <input type="text" class="form-control" id="employeExperienceOragnismeEmployeur" [(ngModel)]="formData.employeExperienceOragnismeEmployeur" name="employeExperienceOragnismeEmployeur" required>
+          <div *ngIf="formSubmitted && !formData.employeExperienceOragnismeEmployeur" class="text-danger">ce champ est requis.</div>
+        </div>
+        <div class="form-group">
+          <label for="employeExperiencePeriode">Periode d'experience:</label>
+          <input type="text" class="form-control" id="employeExperiencePeriode" [(ngModel)]="formData.employeExperiencePeriode" name="employeEducationAnneeObtention" required>
+          <div *ngIf="formSubmitted && !formData.employeExperiencePeriode" class="text-danger">ce champ est requis.</div>
+        </div>
+
+        <div class="form-group">
+            <label for=" employeExperienceFonctionOccupe">Fonction Occupe :</label>
+            <input type="text" class="form-control" id=" employeExperienceFonctionOccupe" [(ngModel)]="formData.employeExperienceFonctionOccupe" name=" employeExperienceFonctionOccupe" required>
+            <div *ngIf="formSubmitted && !formData.employeExperienceFonctionOccupe" class="text-danger">ce champ est requis.</div>
+          </div>
+  
+
+       
+        <div class="form-group">
+          <label for="employeId">Employé :</label>
+          <select class="form-control" id="employeId" [(ngModel)]="formData.employeId" name="employeId" required>
+            <option value="" disabled selected>Sélectionner un employé</option> <!-- Option par défaut -->
+            <option *ngFor="let employe of employes" [value]="employe.id">{{ employe.personneContact}} </option>
+          </select>
+          <div *ngIf="formSubmitted && !formData.employeId" class="text-danger">ce champ est requis.</div>
+        </div>
+        <button type="submit" class="btn width-md btn-bordered margin-btn  btn-success waves-effect waves-light">Créer</button>
+        <a [routerLink]="['/getExperience']">
+          <button class="btn btn-danger text-left btn-ml"> Retour
+          </button>
+      </a>
+      </form>
+    </div>
+    

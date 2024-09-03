@@ -1,0 +1,134 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page">
+    <!-- Start Content-->
+    <div class="container">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Xtensus</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tableau de borad</a></li>
+
+                        </ol>
+
+                    </div>
+                    <h4 class="page-title">Tableau de bord</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        <div class="row">
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card widget-box-one border border-primary bg-soft-primary">
+                    <div class="card-body">
+                        <div class="float-right avatar-lg rounded-circle mt-3">
+                            <i class="mdi mdi-layers font-30 widget-icon rounded-circle avatar-title  text-primary"></i>
+                        </div>
+                        <div class="wigdet-one-content">
+                            <p class="m-0 text-uppercase font-weight-bold text-muted" title="Statistics">Appels d'offres</p>
+                            <p class="text-muted m-0"><span class="font-weight-medium">Nombre Total</span> </p>
+                            <h2><span data-plugin="counterup">{{ totalAppelsOffres !== undefined ? totalAppelsOffres : 0 }}</span>
+                                <a [routerLink]="['/getAppelOffre']"><button class="btn btn-link btn-sm"><i class="mdi mdi-arrow-right text-success font-24"></i></button></a>
+                            </h2>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- end col -->
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card widget-box-one border border-warning bg-soft-warning">
+                    <div class="card-body">
+                        <div class="float-right avatar-lg rounded-circle mt-3">
+                            <i class="mdi mdi-account-convert font-30 widget-icon rounded-circle avatar-title text-warning"></i>
+                        </div>
+                        <div class="wigdet-one-content">
+                            <p  class="m-0 text-uppercase font-weight-bold text-muted" title="User This Month">Clients</p>
+                            <p class="text-muted m-0"><span class="font-weight-medium">Nombre Total</span> </p>
+                            <h2><span data-plugin="counterup">{{ totalClients !== undefined ? totalClients : 0 }}</span>
+                                <a [routerLink]="['/getClient']"><button class="btn btn-link btn-sm"><i class="mdi mdi-arrow-right text-success font-24"></i></button></a>
+                            </h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card widget-box-one border border-danger bg-soft-danger">
+                    <div class="card-body">
+                        <div class="float-right avatar-lg rounded-circle mt-3">
+                            <i class="mdi mdi-layers font-30 widget-icon rounded-circle avatar-title  text-danger"></i>
+                        </div>
+                        <div class="wigdet-one-content">
+                            <p class="m-0 text-uppercase font-weight-bold text-muted" title="Statistics">Projets</p>
+                            <p class="text-muted m-0"><span class="font-weight-medium">Nombre Total</span> </p>
+                            <h2><span data-plugin="counterup">{{ totalProjects !== undefined ? totalProjects : 0 }}</span>
+                                <a [routerLink]="['/getProjet']"><button class="btn btn-link btn-sm"><i class="mdi mdi-arrow-right text-success font-24"></i></button></a>
+                            </h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card widget-box-one border border-success bg-soft-success">
+                    <div class="card-body">
+                        <div class="float-right avatar-lg rounded-circle mt-3">
+                            <i class="mdi mdi-account-convert font-30 widget-icon rounded-circle avatar-title text-success"></i>
+                        </div>
+                        <div class="wigdet-one-content">
+                            <p class="m-0 text-uppercase font-weight-bold text-muted" title="User Today">Employés</p>
+                            <p class="text-muted m-0"><span class="font-weight-medium">Nombre Total</span> </p>
+                            <h2><span data-plugin="counterup">{{ totalEmployees !== undefined ? totalEmployees : 0 }}</span>
+                                <a [routerLink]="['/getEmploye']"><button class="btn btn-link btn-sm"><i class="mdi mdi-arrow-right text-success font-24"></i></button></a>
+                            </h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+        </div>
+         <!-- Graphique de l'appel d'offre -->
+
+           <div class="row">
+            <div>
+                <div class="card">
+                    <div class="card-body">
+                        <div id="container" style="width:100%; height:400px;"></div>
+
+                </div>
+            </div>
+           </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="chart-container chart-container-large">
+                            <div id="container1" style="width:100%; height:400px;"></div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- src/app/participation-chart/participation-chart.component.html -->
+
+        <div class="card">
+            <div class="card-body">
+                <div class="chart-container chart-container-large">
+                    <canvas id="Myhisto" width="400" height="400"></canvas>
+
+
+</div>
+
+</div>
+
+</div>

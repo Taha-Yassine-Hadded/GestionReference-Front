@@ -1,0 +1,62 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page">
+  <!-- Start Content-->
+  <div class="container">
+    <!-- Start Page Title -->
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Liste</a></li>
+              <li class="breadcrumb-item active">Secteur d'activité</li>
+            </ol>
+          </div>
+          <h4 class="page-title">Secteur d'activité</h4>
+        </div>
+      </div>
+    </div>
+    <!-- End Page Title -->
+
+    <!-- Form Section -->
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-box">
+          <form [formGroup]="secteurForm" (ngSubmit)="onSubmit()">
+            <div class="form-group row">
+              <label for="secteurActiviteLibelle" class="col-md-2 col-form-label">Secteur d'activité <span class="text-danger">*</span></label>
+              <div class="col-md-10">
+                <input type="text" class="form-control" id="secteurActiviteLibelle" formControlName="secteurActiviteLibelle" maxlength="254">
+                <div *ngIf="formSubmitted && secteurForm.get('secteurActiviteLibelle')?.errors?.['required']" class="text-danger">
+                  Ce champ est requis.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="secteurActiviteDescription" class="col-md-2 col-form-label">Description</label>
+              <div class="col-md-10">
+                <textarea class="form-control" id="secteurActiviteDescription" formControlName="secteurActiviteDescription" maxlength="254"></textarea>
+                <div *ngIf="formSubmitted && secteurForm.get('secteurActiviteDescription')?.errors?.['required']" class="text-danger">
+                  Ce champ est requis.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-10 offset-md-2">
+                <button class="btn width-md btn-bordered margin-btn btn-success waves-effect waves-light me-2" type="submit">Modifier</button>
+                <a [routerLink]="['/secteurActivite']">
+                  <button class="btn btn-danger text-left btn-ml" type="button">Retour</button>
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Container -->
+</div>

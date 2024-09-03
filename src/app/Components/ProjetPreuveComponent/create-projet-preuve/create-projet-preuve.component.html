@@ -1,0 +1,54 @@
+<div id="app">
+    <app-sidebar></app-sidebar>
+  
+    <div class="content-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Projet Preuve</a></li>
+                                <li class="breadcrumb-item active">Ajouter</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Ajouter un projet preuve</h4>
+                    </div>
+                </div>
+            </div>
+  
+            <div class="row">
+    
+                    <div class="card-box">
+                      <form [formGroup]="projetPreuveForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                          <label for="projetPreuveLibelle">projet preuve :</label>
+                        <input type="text" class="form-control" id="projetPreuveLibelle" formControlName="projetPreuveLibelle">
+                        <div *ngIf="formSubmitted && projetPreuveForm.get('projetPreuveLibelle')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="projetId"> Projet :</label>
+                        <select id="projetId" class="form-control" formControlName="projetId">
+                            <option value="" disabled selected>Sélectionner un projet</option>
+                            <option *ngFor="let projet of projets" [value]="projet.id">{{ projet.projetLibelle }}</option>
+                        </select>
+                        <!-- Déplacez la div contenant le message d'erreur à l'extérieur de la balise select -->
+                        <div *ngIf="formSubmitted && projetPreuveForm.get('projetId')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                    </div>
+                    
+                        <div class="col-md-10 offset-md-2">
+                          <button class="btn width-md btn-bordered margin-btn  btn-success waves-effect waves-light" type="submit">Ajouter</button>
+                          <a [routerLink]="['/getPreuve']">
+                            <button class="btn btn-danger text-left btn-ml"> Retour
+                            </button>
+                        </a>
+                        </div>
+                    </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- end container-fluid -->
+

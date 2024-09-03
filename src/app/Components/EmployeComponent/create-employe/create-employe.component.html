@@ -1,0 +1,119 @@
+<div id="app">
+  <app-sidebar></app-sidebar>
+
+  <div class="content-page">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <div class="page-title-box">
+                      <div class="page-title-right">
+                          <ol class="breadcrumb m-0">
+                              <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+                              <li class="breadcrumb-item"><a href="javascript:void(0);">CV</a></li>
+                              <li class="breadcrumb-item active">Ajouter</li>
+                          </ol>
+                      </div>
+                      <h4 class="page-title">Ajouter un CV</h4>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row pb-3">
+              <div class="col-lg-6">
+                  <div class="card-box">
+                    <form [formGroup]="employeForm" (ngSubmit)="createEmploye()">
+                      <div class="form-group">
+                        <label for="employeNom">Nom <span class="text-danger">*</span></label>
+                        <input type="text" formControlName="employeNom" class="form-control" required maxlength="254">
+                        <div *ngIf="submitButtonClicked && employeForm.get('employeNom')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="employePrenom">Prénom <span class="text-danger">*</span></label>
+                        <input type="text" formControlName="employePrenom" class="form-control" required maxlength="254">
+                        <div *ngIf="submitButtonClicked && employeForm.get('employePrenom')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                      </div>
+                        <div class="form-group">
+                          <label for="employeDateNaissance">Date de naissance <span class="text-danger">*</span></label>
+                          <input type="date" formControlName="employeDateNaissance" class="form-control" required>
+                          <div *ngIf="submitButtonClicked && employeForm.get('employeDateNaissance')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                        </div>
+                      <div class="form-group">
+                        <label for="employeLieuNaissance">Lieu de naissance <span class="text-danger">*</span></label>
+                        <input type="text" formControlName="employeLieuNaissance" class="form-control" required maxlength="254">
+                        <div *ngIf="submitButtonClicked && employeForm.get('employeLieuNaissance')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                      </div>
+                        <div class="form-group">
+                          <label for="employeAdresse">Adresse <span class="text-danger">*</span></label>
+                          <input type="text" formControlName="employeAdresse" class="form-control" required maxlength="254">
+                          <div *ngIf="submitButtonClicked && employeForm.get('employeAdresse')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                        </div>
+
+                      <div class="form-group">
+                        <label for="employePrincipaleQualification">Qualification principale <span class="text-danger">*</span></label>
+                        <input type="text" formControlName="employePrincipaleQualification" class="form-control" required maxlength="254">
+                        <div *ngIf="submitButtonClicked && employeForm.get('employePrincipaleQualification')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                      </div>
+
+                      </form>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                  <div class="card-box">
+
+                  <form [formGroup]="employeForm" (ngSubmit)="createEmploye()">
+                    <div class="form-group">
+                      <label for="employeFormationAutre">Formation autre <span class="text-danger">*</span></label>
+                      <input type="text" formControlName="employeFormationAutre" class="form-control" required maxlength="254">
+                      <div *ngIf="submitButtonClicked && employeForm.get('employeFormationAutre')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="employeAffiliationDesAssociationsGroupPro">Affiliation des associations/groupe professionnel <span class="text-danger">*</span></label>
+                      <input type="text" formControlName="employeAffiliationDesAssociationsGroupPro" class="form-control" required maxlength="254">
+                      <div *ngIf="submitButtonClicked && employeForm.get('employeAffiliationDesAssociationsGroupPro')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                    </div>
+                    <div class="form-group">
+                      <label for="situationFamilialeId">Situation familiale <span class="text-danger">*</span></label>
+                      <select formControlName="situationFamilialeId" class="form-control" required>
+                        <option value="" disabled selected>Sélectionner une situation familiale</option>
+                        <option *ngFor="let situationFamiliale of situationsFamiliales" [value]="situationFamiliale.id">{{ situationFamiliale.situationFamiliale }}</option>
+                      </select>
+                      <div *ngIf="submitButtonClicked && employeForm.get('situationFamilialeId')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="employePosteId">Poste <span class="text-danger">*</span></label>
+                      <select formControlName="employePosteId" class="form-control" required>
+                        <option value="" disabled selected>Sélectionner un poste</option>
+                        <option *ngFor="let poste of postes" [value]="poste.employePosteId">{{ poste.employePosteLibelle }}</option>
+                      </select>
+                      <div *ngIf="submitButtonClicked && employeForm.get('employePosteId')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="employeRemarque">Remarque</label>
+                      <textarea formControlName="employeRemarque" class="form-control" maxlength="254"></textarea>
+                    </div>
+
+                  <!--
+                    <div class="form-group">
+                      <label for="langue_ids">Langues</label>
+                      <select formControlName="langue_ids" class="form-control" multiple>
+                          <option *ngFor="let langue of langues" [value]="langue.id">{{ langue.langueNom }}</option>
+                      </select>
+                      <div *ngIf="submitButtonClicked && employeForm.get('langue_ids')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                  </div>
+                  -->
+
+                      <button type="submit" class="btn width-md btn-bordered margin-btn  btn-success waves-effect waves-light" >Créer </button>
+                      <a [routerLink]="['/getEmploye']">
+                        <button class="btn btn-danger text-left btn-ml"> Retour
+                        </button>
+                    </a>
+                    </form>
+                  </div>
+                  </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<div id="app">
+  <app-sidebar></app-sidebar>
+
+  <div class="content-page">
+    <div class="container">
+      <!-- Start Page Title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box">
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Lieu</a></li>
+                <li class="breadcrumb-item active">Modifier</li>
+              </ol>
+            </div>
+            <h4 class="page-title">Modifier un lieu</h4>
+          </div>
+        </div>
+      </div>
+      <!-- End Page Title -->
+
+      <!-- Start Form Section -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card-box">
+            <form [formGroup]="lieuForm" (ngSubmit)="onSubmit()">
+              <!-- Lieu Field -->
+              <div class="form-group row">
+                <label for="lieuLibelle" class="col-md-2 col-form-label">Lieu <span class="text-danger">*</span></label>
+                <div class="col-md-10">
+                  <input type="text" class="form-control" id="lieuLibelle" formControlName="lieuLibelle" maxlength="254">
+                  <div *ngIf="formSubmitted && lieuForm.get('lieuLibelle')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+                </div>
+              </div>
+
+              <!-- Pays Field -->
+              <div class="form-group row">
+                <label for="paysId" class="col-md-2 col-form-label">Pays <span class="text-danger">*</span></label>
+                <div class="col-md-10">
+                  <select class="form-control" id="paysId" formControlName="paysId">
+                    <option *ngFor="let paysItem of pays" [value]="paysItem.paysId">{{ paysItem.paysLibelle }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Buttons -->
+              <div class="form-group row">
+                <div class="col-md-10 offset-md-2">
+                  <button class="btn width-md btn-bordered margin-btn btn-success waves-effect waves-light me-2" type="submit">Modifier</button>
+                  <a [routerLink]="['/getLieu']">
+                    <button class="btn btn-danger text-left btn-ml" type="button">Retour</button>
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- End Form Section -->
+    </div>
+    <!-- End Container -->
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div id="app">
+  <app-sidebar></app-sidebar>
+
+  <div class="content-page">
+    <div class="container">
+      <!-- Start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box">
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Bailleur fond</a></li>
+                <li class="breadcrumb-item active">Ajouter</li>
+              </ol>
+            </div>
+            <h4 class="page-title">Ajouter bailleur fond</h4>
+          </div>
+        </div>
+      </div>
+      <!-- End page title -->
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card-box">
+            <div class="row">
+              <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="form-horizontal">
+                <div class="form-group row">
+                  <label class="col-md-2 control-label" for="bailleurFondLibelle">Bailleur fond<span class="text-danger">*</span></label>
+                  <div class="col-md-10">
+                    <input type="text" class="form-control" id="bailleurFondLibelle" [(ngModel)]="formData.bailleurFondLibelle" name="bailleurFondLibelle" #bailleurFondLibelle="ngModel" required maxlength="254">
+                    <div *ngIf="formSubmitted && bailleurFondLibelle.invalid" class="text-danger">Ce champ est requis.</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-2 control-label" for="bailleurFondAcronyme">Acronyme<span class="text-danger">*</span></label>
+                  <div class="col-md-10">
+                    <input type="text" class="form-control" id="bailleurFondAcronyme" [(ngModel)]="formData.bailleurFondAcronyme" name="bailleurFondAcronyme" #bailleurFondAcronyme="ngModel" required maxlength="254">
+                    <div *ngIf="formSubmitted && bailleurFondAcronyme.invalid" class="text-danger">Ce champ est requis.</div>
+                  </div>
+                </div>
+
+                <div class="col-md-10 offset-md-2">
+                  <button type="submit" class="btn width-md btn-bordered margin-btn btn-success waves-effect waves-light">Créer</button>
+                  <a [routerLink]="['/bailleurFond']">
+                    <button class="btn btn-danger text-left btn-ml" type="button">Retour</button>
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End row -->
+    </div>
+    <!-- End container-fluid -->
+  </div>
+</div>

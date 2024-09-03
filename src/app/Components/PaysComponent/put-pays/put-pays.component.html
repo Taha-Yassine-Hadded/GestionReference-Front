@@ -1,0 +1,78 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page">
+  <!-- Start Content -->
+  <div class="container">
+    <!-- Start Page Title -->
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Liste</a></li>
+              <li class="breadcrumb-item active">Pays</li>
+            </ol>
+          </div>
+          <h4 class="page-title">Pays</h4>
+        </div>
+      </div>
+    </div>
+    <!-- End Page Title -->
+
+    <!-- Start Form Section -->
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-box">
+          <form [formGroup]="paysForm" (ngSubmit)="onSubmit()">
+            <!-- Pays Field -->
+            <div class="form-group row">
+              <label for="paysLibelle" class="col-md-2 col-form-label">Pays <span class="text-danger">*</span></label>
+              <div class="col-md-10">
+                <input type="text" class="form-control" id="paysLibelle" formControlName="paysLibelle" maxlength="254">
+                <div *ngIf="formSubmitted && paysForm.get('paysLibelle')?.errors?.['required']" class="text-danger">
+                  Ce champ est requis.
+                </div>
+              </div>
+            </div>
+
+            <!-- Capitale Field -->
+            <div class="form-group row">
+              <label for="paysCapitale" class="col-md-2 col-form-label">Capitale <span class="text-danger">*</span></label>
+              <div class="col-md-10">
+                <input type="text" class="form-control" id="paysCapitale" formControlName="paysCapitale">
+                <div *ngIf="formSubmitted && paysForm.get('paysCapitale')?.errors?.['required']" class="text-danger">
+                  Ce champ est requis.
+                </div>
+              </div>
+            </div>
+
+            <!-- Continent Field -->
+            <div class="form-group row">
+              <label for="continentId" class="col-md-2 col-form-label">Continent <span class="text-danger">*</span></label>
+              <div class="col-md-10">
+                <select class="form-control" id="continentId" formControlName="continentId">
+                  <option *ngFor="let continentItem of continents" [value]="continentItem.continentId">
+                    {{ continentItem.continentName }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-group row">
+              <div class="col-md-10 offset-md-2">
+                <button class="btn width-md btn-bordered margin-btn btn-success waves-effect waves-light me-2" type="submit">Modifier</button>
+                <a [routerLink]="['/getPays']">
+                  <button class="btn btn-danger text-left btn-ml" type="button">Retour</button>
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Form Section -->
+  </div>
+  <!-- End Container -->
+</div>

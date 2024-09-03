@@ -1,0 +1,144 @@
+<!-- Topbar Start -->
+<div class="navbar-custom header-margin ">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="list-unstyled topnav-menu float-right mb-0">
+        <li class="dropdown notification-list">
+            <div ngbDropdown class="d-inline-block">
+                <button type="button" class="btn" id="dropdownBasic1" ngbDropdownToggle>
+                    <i class="mdi mdi-bell noti-icon text-secondary" style="font-size: 30px;"></i>
+                    <span class="badge badge-success rounded-circle noti-icon-badge">{{ unreadNotificationCount }}</span>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <div class="dropdown-item noti-title">
+                        <h5 class="font-16 m-0">
+                            <span class="float-right"></span>Notification
+                        </h5>
+                        <hr>
+                    </div>
+                    <ng-container *ngIf="notifications.length > 0; else noNotifications">
+                        <ng-container *ngFor="let notification of notifications">
+                            <a class="dropdown-item notification-item" [routerLink]="['/appel-offre-details', notification.appelOffre.id]">
+                                <!-- Afficher le message de la notification -->
+                                <p class="notification-title">Appel d'offre Devis : {{ notification.appelOffre.devis }}</p>
+                                <!-- Afficher les détails supplémentaires de la notification -->
+                                <div class="notification-details">
+                                    {{ notification.message }}
+                                    <p>Date de Remise : {{ notification.appelOffre.dateRemise }}</p>
+                                    <!-- Ajoutez d'autres détails de la notification au besoin -->
+                                </div>
+                            </a>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #noNotifications>
+                        <div class="dropdown-item no-notifications">
+                            <p>Aucune notification disponible</p>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </li>
+        <li class="dropdown notification-list">
+            <div ngbDropdown class="d-inline-block">
+                <button type="button" class="btn" id="dropdownBasic2" ngbDropdownToggle>
+                    <i class="mdi mdi-account-circle text-secondary" style="font-size: 30px;"></i>
+                    <span class="username">{{ username }}</span>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                    <a class="dropdown-item" [routerLink]="['/profile']">
+                        <!-- Afficher les détails du compte -->
+                        <div>Profile</div>
+                    </a>
+                    <a [routerLink]="['/signin']" class="dropdown-item" (click)="logout()">
+                        <!-- Bouton de déconnexion -->
+                        <div>Déconnexion</div>
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+<!--Menu RESPONSIVE SM-->
+    <!-- LOGO -->
+    <div class="logo-box fixed-top">
+
+        <a href="index.html" class="logo text-center">
+            <span class="logo-lg">
+                <img src="../assets/images/xtensus-logo.png" alt="" class="img-style margin-top-img">
+            </span>
+
+            <span class="logo-sm">
+                <img src="assets/images/logo-sm.png" alt="" height="24">
+            </span>
+        </a>
+    </div>
+</div>
+<!-- end Topbar -->
+
+<div class="left-side-menu">
+
+    <div class="slimscroll-menu slimscroll-none" id="sidebar-scrollbar">
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+
+            <ul class="metismenu margin-top" id="side-menu">
+                <li>
+                    <a href="javascript:void(0);" class="waves-effect waves-light">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span><a [routerLink]="['/stat']" class="color custom-link">Tableau de bord</a></span>
+                    </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0);" class="waves-effect waves-light">
+                    <i class="mdi mdi-clipboard-list"></i>
+                    <span><a [routerLink]="['/getReference']" class="color custom-link">Références</a></span>
+                  </a>
+                </li>
+              <li *ngIf="isAdmin">
+                <a href="javascript:void(0);" class="waves-effect waves-light">
+                  <i class="mdi mdi-account-multiple"></i>
+                  <span><a [routerLink]="['/getClient']" class="color custom-link">Clients</a></span>
+                </a>
+              </li>
+              <li *ngIf="isAdmin">
+                <a href="javascript:void(0);" class="waves-effect waves-light">
+                  <i class="mdi mdi-file"></i>
+                  <span><a [routerLink]="['/getEmploye']" class="color custom-link">CV</a></span>
+                </a>
+              </li>
+              <li *ngIf="isAdmin">
+                <a href="javascript:void(0);" class="waves-effect waves-light">
+                  <i class="mdi mdi-briefcase-search"></i>
+                  <span><a [routerLink]="['/getAppelOffre']" class="color custom-link">Appels d'offres</a></span>
+                </a>
+              </li>
+              <li *ngIf="isAdmin">
+                <a href="javascript:void(0);" class="waves-effect waves-light">
+                  <i class="mdi mdi-settings "></i>
+                  <span><a [routerLink]="['/parametrage']" class="color custom-link">Paramétrage</a></span>
+                </a>
+              </li>
+
+            </ul>
+
+        </div>
+    </div>
+</div>
+<!-- Footer Start -->
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                2024 &copy; Xtensus.
+            </div>
+            <div class="col-md-6">
+                <div class="text-md-right footer-links d-none d-md-block">
+                    <a href="#">About Us</a>
+                    <a href="#">Help</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end Footer -->

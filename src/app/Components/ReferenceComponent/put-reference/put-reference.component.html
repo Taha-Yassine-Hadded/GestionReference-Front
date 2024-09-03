@@ -1,0 +1,381 @@
+<div id="app">
+    <app-sidebar></app-sidebar>
+
+    <div class="content-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Référence</a></li>
+                                <li class="breadcrumb-item active">Modifier</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Modifier une référence</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-box">
+                <form [formGroup]="referenceForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-lg-6">
+
+                            <!--  Form Fields (adjust based on your entity properties) -->
+                            <div class="form-group">
+                                <label>Réf. <span class="text-danger">*</span></label>
+                                <input type="text" id="referenceRef" formControlName="referenceRef"
+                                    class="form-control">
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceRef')?.errors?.['required']"
+                                    class="text-danger">Ce champ est requis.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Libellé <span class="text-danger">*</span></label>
+                                <input type="text" id="referenceLibelle" formControlName="referenceLibelle"
+                                    class="form-control">
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceLibelle')?.errors?.['required']"
+                                    class="text-danger">Ce champ est requis.</div>
+                            </div>
+
+
+                            <div class="form-group ">
+                                <label>Pays <span class="text-danger">*</span></label>
+                                <select id="paysId" formControlName="paysId" class="form-control">
+                                    <option value="" disabled selected>Sélectionner une pays</option>
+                                    <option *ngFor="let pay of pays" [value]="pay.paysId">{{ pay.paysLibelle}}
+                                    </option>
+                                </select>
+                                <div *ngIf="submitButtonClicked && referenceForm.get('paysId')?.errors?.['required']"
+                                    class="text-danger">
+                                    Ce champ est requis.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Client <span class="text-danger">*</span></label>
+                                <select id="clientId" formControlName="clientId" class="form-control">
+                                    <option value="" disabled selected>Sélectionner un client</option>
+                                    <!-- Option par défaut -->
+                                    <option *ngFor="let client of clients" [value]="client.clientId">{{
+                                        client.personneContact}}</option>
+                                </select>
+                                <div *ngIf="submitButtonClicked && referenceForm.get('clientId')?.errors?.['required']"
+                                    class="text-danger">Ce champ est requis.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date de Démarrage <span class="text-danger">*</span></label>
+                                <input type="date" id="referenceDateDemarrage" formControlName="referenceDateDemarrage"
+                                    class="form-control">
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceDateDemarrage')?.errors?.['required']"
+                                    class="text-danger">Ce champ est requis.</div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label>Date de Réception Provisoire <span class="text-danger">*</span></label>
+                                <input type="date" id="referenceDateReceptionProvisoire"
+                                    formControlName="referenceDateReceptionProvisoire" class="form-control">
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceDateReceptionProvisoire')?.errors?.['required']"
+                                    class="text-danger">
+                                    Ce champ est requis.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Budget <span class="text-danger">*</span></label>
+                                <input type="text" id="referenceBudget" formControlName="referenceBudget"
+                                    class="form-control">
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceDureeGarantie')?.errors?.['required']"
+                                    class="text-danger">Ce champ est requis.</div>
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceDureeGarantie')?.errors?.['pattern']"
+                                    class="text-danger">
+                                    Veuillez entrer une durée de garantie valide.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Part du Budget du Groupement <span class="text-danger">*</span></label>
+                                <input type="text" id="referencePartBudgetGroupement"
+                                    formControlName="referencePartBudgetGroupement" class="form-control">
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referencePartBudgetGroupement')?.errors?.['required']"
+                                    class="text-danger">
+                                    Ce champ est requis.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="environnementsIds">Environnements <span class="text-danger">*</span></label>
+                                <p-pickList [source]="environnements" [target]="selectedEnvironnements"
+                                    sourceHeader="Disponible" targetHeader="Sélectionné"
+                                    formControlName="environnementIds" [dragdrop]="true" [responsive]="true"
+                                    [showSourceControls]="false"
+                                    [sourceStyle]="{ height: '12rem', border: '1px solid #ccc', borderRadius: '4px' }"
+                                    [targetStyle]="{ height: '12rem', border: '1px solid #ccc', borderRadius: '4px' }"
+                                    [showTargetControls]="false" breakpoint="1000px"
+                                    filterBy="methodologieLibelle"
+                                    filterPlaceholder="Rechercher les méthodologies..."
+                                    (onMoveToTarget)="onPickListChange('selectedEnvironnements', 'environnementIds')">
+                                    <ng-template let-environnement pTemplate="item">
+                                        <div class="flex flex-wrap p-2 align-items-center gap-3">
+                                            <div class="flex-1 flex flex-column gap-2">
+                                                <span class="font-bold">
+                                                    {{environnement.environnementDeveloppementLibelle}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-pickList>
+                                <div *ngIf="referenceForm.get('environnementIds')?.hasError('required') && submitButtonClicked"
+                                    class="text-danger">
+                                    Au moins un environnement doit être sélectionné.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="methodologiesIds">Méthodologies <span class="text-danger">*</span></label>
+                                <p-pickList [source]="methodologies" [target]="selectedMethodologies"
+                                    sourceHeader="Disponible" targetHeader="Sélectionné"
+                                    formControlName="methodologieIds" [dragdrop]="true" [responsive]="true"
+                                    [showSourceControls]="false"
+                                    [sourceStyle]="{ height: '12rem', border: '1px solid #ccc', borderRadius: '4px'}"
+                                    [targetStyle]="{ height: '12rem', border: '1px solid #ccc', borderRadius: '4px'}"
+                                    [showTargetControls]="false" breakpoint="1000px"
+                                    (onMoveToTarget)="onPickListChange('selectedMethodologies', 'methodologieIds')">
+                                    <ng-template let-methodology pTemplate="item">
+                                        <div class="flex flex-wrap p-2 align-items-center gap-3">
+                                            <div class="flex-1 flex flex-column gap-2">
+                                                <span class="font-bold">
+                                                    {{methodology.methodologieLibelle }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-pickList>
+                                <div *ngIf="referenceForm.get('methodologieIds')?.hasError('required') && submitButtonClicked"
+                                    class="text-danger">
+                                    Au moins une méthodologie doit être sélectionnée.
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-lg-6">
+
+
+                            <!--  Form Fields (adjust based on your entity properties) -->
+                            <div class="form-group">
+                                <label>Titre <span class="text-danger">*</span></label>
+                                <input type="text" id="referenceTitre" formControlName="referenceTitre"
+                                    class="form-control">
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceTitre')?.errors?.['required']"
+                                    class="text-danger">Ce champ est requis.</div>
+                            </div>
+                            <div class="form-group">
+                                <label>URL Fonctionnel <span class="text-danger">*</span></label>
+                                <input type="text" id="referenceUrlFonctionnel"
+                                    formControlName="referenceUrlFonctionnel" class="form-control">
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceUrlFonctionnel')?.errors?.['required']"
+                                    class="text-danger">
+                                    Ce champ est requis.
+                                </div>
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceUrlFonctionnel')?.errors?.['pattern']"
+                                    class="text-danger">
+                                    Veuillez entrer une URL valide.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Lieu <span class="text-danger">*</span></label>
+                                <select id="lieuId" formControlName="lieuId" class="form-control">
+                                    <option value="" disabled selected>Sélectionner un lieu</option>
+                                    <!-- Option par défaut -->
+                                    <option *ngFor="let lieu of lieux" [value]="lieu.lieuId">{{ lieu.lieuLibelle
+                                        }}
+                                    </option>
+                                </select>
+                                <div *ngIf="submitButtonClicked && referenceForm.get('lieuId')?.errors?.['required']"
+                                    class="text-danger">Ce champ est requis.</div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label>Durée (mois) <span class="text-danger">*</span></label>
+                                <input type="text" id="referenceDuree" formControlName="referenceDuree"
+                                    class="form-control">
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceDuree')?.errors?.['required']"
+                                    class="text-danger">
+                                    Ce champ est requis.
+                                </div>
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceDuree')?.errors?.['pattern']"
+                                    class="text-danger">
+                                    Veuillez entrer une durée valide.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date d'Achèvement <span class="text-danger">*</span></label>
+                                <input type="date" id="referenceDateAchevement"
+                                    formControlName="referenceDateAchevement" class="form-control">
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceDateAchevement')?.errors?.['required']"
+                                    class="text-danger">Ce champ est requis.</div>
+                            </div>
+
+                            <!-- Date de Réception Définitive -->
+                            <div class="form-group ">
+                                <label>Date de Réception Définitive </label>
+                                <input type="date" id="referenceDateReceptionDefinitive"
+                                    formControlName="referenceDateReceptionDefinitive" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Devise <span class="text-danger">*</span></label>
+                                <select id="devisesId" formControlName="devisesId" class="form-control">
+                                    <option value="" disabled selected>Sélectionner une devise</option>
+                                    <!-- Option par défaut -->
+                                    <option *ngFor="let devise of devises" [value]="devise.devisesId">{{
+                                        devise.devisesLibelle}} ({{devise.devisesAcronyme}})</option>
+                                </select>
+                                <div *ngIf="submitButtonClicked && referenceForm.get('devisesId')?.errors?.['required']"
+                                    class="text-danger">Ce champ est requis.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Durée de Garantie (mois) <span class="text-danger">*</span></label>
+                                <input type="text" id="referenceDureeGarantie" formControlName="referenceDureeGarantie"
+                                    class="form-control">
+
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceDureeGarantie')?.errors?.['required']"
+                                    class="text-danger">
+                                    Ce champ est requis.
+                                </div>
+                                <div *ngIf="submitButtonClicked && referenceForm.get('referenceDureeGarantie')?.errors?.['pattern']"
+                                    class="text-danger">
+                                    Veuillez entrer une durée valide.
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <label for="technologiesIds">Technologies <span class="text-danger">*</span></label>
+                                <p-pickList [source]="technologies" [target]="selectedTechnologies"
+                                    sourceHeader="Disponible" targetHeader="Sélectionné"
+                                    formControlName="technologieIds" [dragdrop]="true" [responsive]="true"
+                                    [showSourceControls]="false"
+                                    [sourceStyle]="{ height: '12rem', border: '1px solid #ccc', borderRadius: '4px' }"
+                                    [targetStyle]="{ height: '12rem', border: '1px solid #ccc', borderRadius: '4px' }"
+                                    [showTargetControls]="false" breakpoint="1000px"
+                                    filterBy="referenceTechnologieLibelle"
+                                    filterPlaceholder="Rechercher les technologies..."
+                                    (onMoveToTarget)="onPickListChange('selectedTechnologies', 'technologieIds')">
+                                    <ng-template let-technology pTemplate="item">
+                                        <div class="flex flex-wrap p-2 align-items-center gap-3">
+                                            <div class="flex-1 flex flex-column gap-2">
+                                                <span class="font-bold">
+                                                    {{technology.referenceTechnologieLibelle }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-pickList>
+                                <div *ngIf="referenceForm.get('technologieIds')?.hasError('required') && submitButtonClicked"
+                                    class="text-danger">
+                                    Au moins une technologie doit être sélectionnée.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Catégorie <span class="text-danger">*</span></label>
+                                <select id="categorieId" formControlName="categorieId" class="form-control">
+                                    <option value="" disabled selected>Sélectionner une catégorie</option>
+                                    <!-- Option par défaut -->
+                                    <option *ngFor="let categorie of categories" [value]="categorie.categorieId">{{
+                                        categorie.categorieLibelle}}</option>
+                                </select>
+                                <div *ngIf="submitButtonClicked && referenceForm.get('categorieId')?.errors?.['required']"
+                                    class="text-danger">
+                                    Ce champ est requis.
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 30 px ;">
+                                <label for="bailleurFondsIds">Bailleur Fonds</label>
+                                <mat-select placeholder="Select options" [(ngModel)]="selectedBailleurFonds"
+                                    formControlName="bailleurFondIds" multiple>
+                                    <mat-option *ngFor="let bailleurFond of bailleurFonds"
+                                        [value]="bailleurFond.bailleurFondId">
+                                        {{bailleurFond.bailleurFondLibelle}}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rolesIds">Roles <span class="text-danger">*</span></label>
+                                <mat-select placeholder="Select options" [(ngModel)]="selectedRoles"
+                                    formControlName="roleIds" multiple>
+                                    <mat-option *ngFor="let role of roles" [value]="role.roleId">
+                                        {{role.roleLibelle}}
+                                    </mat-option>
+                                </mat-select>
+                                <div *ngIf="referenceForm.get('roleIds')?.hasError('required') && submitButtonClicked"
+                                    class="text-danger">
+                                    Au moins un rôle doit être sélectionné.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Caractéristiques <span class="text-danger">*</span></label>
+                        <textarea id="referenceCaracteristiques" formControlName="referenceCaracteristiques"
+                            class="form-control" rows="8"></textarea>
+                        <div *ngIf="submitButtonClicked && referenceForm.get('referenceCaracteristiques')?.errors?.['required']"
+                            class="text-danger">
+                            Ce champ est requis.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description <span class="text-danger">*</span></label>
+                        <ckeditor id="referenceDescription" formControlName="referenceDescription" [editor]="Editor"
+                            [config]="config" style="height: 500px;">
+                        </ckeditor>
+                        <div *ngIf="submitButtonClicked && referenceForm.get('referenceDescription')?.errors?.['required']"
+                            class="text-danger">
+                            Ce champ est requis.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description des Services Effectivement Rendus <span class="text-danger">*</span></label>
+                        <ckeditor formControlName="referenceDescriptionServiceEffectivemenetRendus" [editor]="Editor"
+                            [config]="config" class="ckeditor-custom-height">
+                        </ckeditor>
+                        <div *ngIf="submitButtonClicked && referenceForm.get('referenceDescriptionServiceEffectivemenetRendus')?.errors?.['required']"
+                            class="text-danger">
+                            Ce champ est requis.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Remarque</label>
+                        <ckeditor id="referenceRemarque" formControlName="referenceRemarque" [editor]="Editor"
+                            [config]="config" class="ckeditor-custom-height">
+                        </ckeditor>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit"
+                            class="btn width-md btn-bordered margin-btn  btn-success waves-effect waves-light">Modifier</button>
+                        <a [routerLink]="['/getReference']">
+                            <button class="btn btn-danger text-left btn-ml"> Retour
+                            </button>
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<app-sidebar></app-sidebar>
+<div class="content-page">
+    <!-- Start Content-->
+    <div class="container">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Xtensus</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ajouter</a></li>
+                            <li class="breadcrumb-item active">Categorie</li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Catégorie</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card-box">
+                    <div class="row">
+                        <form (ngSubmit)="createCategorie()" class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-md-2 control-label">Catégorie <span class="text-danger">*</span></label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" [(ngModel)]="newCategorie.categorieLibelle" name="categorieLibelle" maxlength="254">
+                                    <div *ngIf="formSubmitted && !newCategorie.categorieLibelle" class="text-danger">ce champ est requis.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-md-2 control-label">Short <span class="text-danger">*</span></label>
+                              <div class="col-md-10">
+                                <input type="text" class="form-control" [(ngModel)]="newCategorie.categorieShort" name="categorieShort" maxlength="254">
+                                <div *ngIf="formSubmitted && !newCategorie.categorieShort" class="text-danger">ce champ est requis.</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-md-2 control-label">Code Réf <span class="text-danger">*</span></label>
+                              <div class="col-md-10">
+                                <input type="text" class="form-control" [(ngModel)]="newCategorie.categorieCodeRef" name="categorieCodeRef" maxlength="254">
+                                <div *ngIf="formSubmitted && !newCategorie.categorieCodeRef" class="text-danger">ce champ est requis.</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-md-2 control-label">Code Couleur <span class="text-danger">*</span></label>
+                              <div class="col-md-10">
+                                <input type="text" class="form-control" [(ngModel)]="newCategorie.categorieCodeCouleur" name="categorieCodeCouleur" maxlength="254">
+                                <div *ngIf="formSubmitted && !newCategorie.categorieCodeCouleur" class="text-danger">ce champ est requis.</div>
+                              </div>
+                            </div>
+
+                            <div class="col-md-10 offset-md-2">
+                                <button class="btn width-md btn-bordered margin-btn btn-success waves-effect waves-light" type="submit">Ajouter</button>
+                                <a [routerLink]="['/getCategorie']">
+                                    <button class="btn btn-danger text-left btn-ml"> Retour
+                                    </button>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container-fluid -->
+    </div>
+    <!-- end content -->
+</div>
+<!-- End Page content -->

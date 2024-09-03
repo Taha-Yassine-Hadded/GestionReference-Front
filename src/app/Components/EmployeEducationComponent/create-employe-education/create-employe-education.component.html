@@ -1,0 +1,63 @@
+<div id="app">
+  <app-sidebar></app-sidebar>
+
+  <div class="content-page">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <div class="page-title-box">
+                      <div class="page-title-right">
+                          <ol class="breadcrumb m-0">
+                              <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+                              <li class="breadcrumb-item"><a href="javascript:void(0);">Employe Education</a></li>
+                              <li class="breadcrumb-item active">Ajouter</li>
+                          </ol>
+                      </div>
+                      <h4 class="page-title">Ajouter education à un employé</h4>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row">
+  
+                  <div class="card-box">
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="employeEducationNatureEtudes">Nature des études :</label>
+        <input type="text" class="form-control" id="employeEducationNatureEtudes" [(ngModel)]="formData.employeEducationNatureEtudes" name="employeEducationNatureEtudes" required>
+        <div *ngIf="formSubmitted && !formData.employeEducationNatureEtudes" class="text-danger">ce champ est requis.</div>
+
+      </div>
+      <div class="form-group">
+        <label for="employeEducationEtablissement">Établissement :</label>
+      <input type="text" class="form-control" id="employeEducationEtablissement" [(ngModel)]="formData.employeEducationEtablissement" name="employeEducationEtablissement" required>
+      <div *ngIf="formSubmitted && !formData.employeEducationEtablissement" class="text-danger">ce champ est requis.</div>
+      <div class="form-group">
+        <label for="employeEducationDiplomes">Diplômes :</label>
+        <input type="text" class="form-control" id="employeEducationDiplomes" [(ngModel)]="formData.employeEducationDiplomes" name="employeEducationDiplomes" required>
+        <div *ngIf="formSubmitted && !formData.employeEducationDiplomes" class="text-danger">ce champ est requis.</div>
+      </div>
+      <div class="form-group">
+        <label for="employeEducationAnneeObtention">Année d'obtention :</label>
+        <input type="date" class="form-control" id="employeEducationAnneeObtention" [(ngModel)]="formData.employeEducationAnneeObtention" name="employeEducationAnneeObtention" required>
+        <div *ngIf="formSubmitted && !formData.employeEducationAnneeObtention" class="text-danger">ce champ est requis.</div>
+      </div>
+   
+        <div class="form-group">
+            <label for="employeId">Employé :</label>
+            <select class="form-control" id="employeId" [(ngModel)]="formData.employeId" name="employeId" required>
+                <option value="" disabled selected>Sélectionner un employé</option> <!-- Option par défaut -->
+                <option *ngFor="let employe of employes" [value]="employe.id">{{ employe.personneContact}} </option>
+            </select>
+        </div>
+        <div *ngIf="formSubmitted && !formData.employeId" class="text-danger">Ce champ est requis.</div>
+    </div>
+      <button type="submit" class="btn width-md btn-bordered margin-btn  btn-success waves-effect waves-light">Créer</button>
+      <a [routerLink]="['/getEducation']">
+        <button class="btn btn-danger text-left btn-ml"> Retour
+        </button>
+    </a>
+    </form>
+  </div>
+  

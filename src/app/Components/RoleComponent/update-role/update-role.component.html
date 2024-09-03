@@ -1,0 +1,58 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page">
+  <!-- Start Content-->
+  <div class="container">
+    <!-- Start Page Title -->
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Liste</a></li>
+              <li class="breadcrumb-item active">Rôles</li>
+            </ol>
+          </div>
+          <h4 class="page-title">Rôle</h4>
+        </div>
+      </div>
+    </div>
+    <!-- End Page Title -->
+
+    <!-- Form Section -->
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-box">
+          <form [formGroup]="roleForm" (ngSubmit)="onSubmit()">
+            <div class="form-group row">
+              <label for="roleLibelle" class="col-md-2 col-form-label">Rôle <span class="text-danger">*</span></label>
+              <div class="col-md-10">
+                <input type="text" class="form-control" id="roleLibelle" formControlName="roleLibelle" maxlength="254">
+                <div *ngIf="formSubmitted && roleForm.get('roleLibelle')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="roleShort" class="col-md-2 col-form-label">Short <span class="text-danger">*</span></label>
+              <div class="col-md-10">
+                <input type="text" class="form-control" id="roleShort" formControlName="roleShort" maxlength="254">
+                <div *ngIf="formSubmitted && roleForm.get('roleShort')?.errors?.['required']" class="text-danger">Ce champ est requis.</div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-10 offset-md-2">
+                <button class="btn width-md btn-bordered margin-btn btn-success waves-effect waves-light me-2" type="submit">Modifier</button>
+                <a [routerLink]="['/role']">
+                  <button class="btn btn-danger text-left btn-ml" type="button">Retour</button>
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Container -->
+</div>

@@ -1,0 +1,64 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="#">Xtensus</a></li>
+                            <li class="breadcrumb-item"><a href="#">Utilisateur</a></li>
+                            <li class="breadcrumb-item active">Profile</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="profile-header mb-4 text-center">
+                            <div class="avatar-md rounded-circle bg-soft-primary mx-auto">
+                                <i class="mdi mdi-account-circle-outline profile-icon text-primary icon-profil"></i>
+                            </div>
+                           
+                        </div>
+
+                        <div *ngIf="userProfile" class="profile-details">
+                            <div class="row align-items-center mb-3">
+                                <div class="col-md-2 text-center">
+                                    <i class="mdi mdi-email-outline color"></i>
+                                </div>
+                                <div class="col-md-10 ">
+                                    <p class="label-profil"><strong>Email:</strong> {{ userProfile.email }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row align-items-center mb-3">
+                                <div class="col-md-2 text-center">
+                                    <i class="mdi mdi-account-outline color"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    <p class="label-profil"><strong>Username:</strong> {{ userProfile.username }}</p>
+                                </div>
+                            </div>
+                            <!-- Add more fields to display other profile information if needed -->
+                            <div class="text-center mt-4">
+                              <a [routerLink]="['/changePwd']">
+                                <button class="btn back-color color">Changer le mot de passe</button>
+                              </a>
+                            </div>
+                        </div>
+
+                        <div *ngIf="!userProfile" class="no-profile text-center">
+                            <p>No user profile available</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

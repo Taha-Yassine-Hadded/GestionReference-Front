@@ -1,0 +1,256 @@
+<app-sidebar></app-sidebar>
+<div class="content-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Xtensus</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Liste</a></li>
+              <li class="breadcrumb-item active">Référence</li>
+            </ol>
+            <div *ngIf="isAdmin" class="row mb-3">
+              <div class="col-12">
+                <a [routerLink]="['/createReference']">
+                  <button class="btn btn-success" title="Cliquez ici pour ajouter">
+                    <i class="fas fa-plus"></i> Ajouter
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <h4 class="page-title">Références</h4>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 card-box">
+        <div class="d-flex flex-wrap mb-3">
+          <div class="btn-group" role="group">
+            <button *ngFor="let category of categories"
+                    class="btn btn-light border category-button"
+                    [ngClass]="{
+              'btn-primary': category.categorieId === selectedCategoryId,
+              'btn-light': category.categorieId !== selectedCategoryId
+            }"
+                    (click)="onCategorySelect(category.categorieId)">
+              {{ category.categorieShort }}
+            </button>
+          </div>
+        </div>
+
+
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header style="background-color: #ebebeb;">
+              <mat-panel-title>
+                <h5 class="text-black ms-2">Filtrer</h5>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="p-3">
+              <!-- Filter Form -->
+              <form [formGroup]="form">
+                <!-- Line 1: Annee du -->
+                <div class="row mb-4">
+                  <div class="col-md-2 d-flex align-items-center">
+                    <label for="annee-du" class="form-label mb-0">Année du</label>
+                  </div>
+                  <div class="col-md-3">
+                    <select id="anneeDu" formControlName="anneeDu" class="form-select">
+                      <option *ngFor="let annee of anneeDuOptions" [value]="annee">{{ annee }}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-1"></div>
+                  <div class="col-md-2 d-flex align-items-center">
+                    <label for="anneeAu" class="form-label mb-0">au</label>
+                  </div>
+                  <div class="col-md-3">
+                    <select id="annee-au" formControlName="anneeAu" class="form-select">
+                      <option *ngFor="let annee of anneeAuOptions" [value]="annee">{{ annee }}</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="row mb-2">
+                  <!-- Pays -->
+                  <div class="col-md-2 d-flex align-items-center">
+                    <label for="pays" class="form-label mb-0">Pays</label>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field class="form-field-style w-100">
+                      <mat-select placeholder="Sélectionner les pays" [(ngModel)]="selectedPays" formControlName="paysIds" multiple>
+                        <mat-option *ngFor="let pays of paysList" [value]="pays.paysId">
+                          {{ pays.paysLibelle }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-1"></div>
+
+                    <!-- Budget -->
+                    <div class="col-md-2 d-flex align-items-center">
+                      <label for="budget" class="form-label mb-0">Budget (>=)</label>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-center">
+                      <input id="budget" type="text" class="form-control form-control-sm w-100" formControlName="budget" placeholder="Entrer un budget">
+                    </div>
+                </div>
+
+
+                <div class="row mb-2">
+                  <!-- Bailleur de Fonds (now first) -->
+                  <div class="col-md-2 d-flex align-items-center">
+                    <label for="bailleur-fond" class="form-label mb-0">Bailleur de Fonds</label>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field class="form-field-style w-100" appearance="fill">
+                      <mat-select placeholder="Sélectionner les bailleurs fonds" [(ngModel)]="selectedBailleurFonds" formControlName="bailleurFondIds" multiple>
+                        <mat-option *ngFor="let bailleurFond of bailleurFonds" [value]="bailleurFond.bailleurFondId">
+                          {{ bailleurFond.bailleurFondLibelle }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-1"></div>
+
+                  <!-- Réception Définitive (now second) -->
+                  <div class="col-md-2 d-flex align-items-center">
+                    <label for="reception" class="form-label mb-0">Réception Définitive</label>
+                  </div>
+                  <div class="col-md-4 d-flex align-items-center">
+                    <div class="form-check me-3">
+                      <input type="radio" id="reception-oui" name="reception" value="oui" class="form-check-input" formControlName="reception">
+                      <label for="reception-oui" class="form-check-label">Oui</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="radio" id="reception-non" name="reception" value="non" class="form-check-input" formControlName="reception">
+                      <label for="reception-non" class="form-check-label">Non</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-6">
+                    <div class="col-md-12 d-flex justify-content-end">
+                      <button (click)="filterReferences()" class="btn btn-primary">Appliquer les filtres</button>
+                    </div>
+                  </div>
+              </form>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+    <div class="col-12 pb-5">
+        <div class="card-box">
+          <form>
+            <div class="row align-items-center justify-content-end mb-3">
+              <div class="col-sm-4 d-flex justify-content-end">
+                <div class="mr-1">
+                  <button class="btn btn-success btn-sm" (click)="generatePdfForAllReferences()" title="Cliquez ici pour rapport">
+                    <i class="far fa-file-pdf"></i>
+                  </button>
+                </div>
+                <button class="btn btn-primary btn-sm" (click)="generateWordForAllReferences()" title="Cliquez ici pour rapport Word">
+                  <i class="far fa-file-word"></i>
+                </button>
+              </div>
+              <div class="col-sm-4">
+                <input type="text" [(ngModel)]="searchTerm" name="search" class="form-control"
+                  (input)="onSearchChange()" placeholder="Recherche">
+              </div>
+
+
+            </div>
+          </form>
+          <div class="table-rep-plugin">
+            <div class="table-responsive mb-0" data-pattern="priority-columns">
+              <table id="tech-companies-1" class="table table-striped mb-0">
+                <thead>
+                <tr>
+                  <th (click)="sortReferences('referenceRef')" [class.sorted]="sortColumn === 'referenceRef'">
+                    Réf.
+                    <i [ngClass]="sortColumn === 'referenceRef' ? (sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down') : 'fas fa-sort'"></i>
+                  </th>
+                  <th (click)="sortReferences('referenceTitre')" [class.sorted]="sortColumn === 'referenceTitre'">
+                    Titre
+                    <i [ngClass]="sortColumn === 'referenceTitre' ? (sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down') : 'fas fa-sort'"></i>
+                  </th>
+                  <th (click)="sortReferences('clientId')" [class.sorted]="sortColumn === 'clientId'">
+                    Client
+                    <i [ngClass]="sortColumn === 'clientId' ? (sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down') : 'fas fa-sort'"></i>
+                  </th>
+                  <th (click)="sortReferences('referenceDateDemarrage')" [class.sorted]="sortColumn === 'referenceDateDemarrage'">
+                    Début
+                    <i [ngClass]="sortColumn === 'referenceDateDemarrage' ? (sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down') : 'fas fa-sort'"></i>
+                  </th>
+                  <th (click)="sortReferences('referenceDateAchevement')" [class.sorted]="sortColumn === 'referenceDateAchevement'">
+                    Fin
+                    <i [ngClass]="sortColumn === 'referenceDateAchevement' ? (sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down') : 'fas fa-sort'"></i>
+                  </th>
+                  <th class="text-center actions-column">
+                    <span>Action</span>
+                  </th>
+                </tr>
+                </thead>
+
+                <tbody *ngIf="references$ | async as references">
+                  <tr *ngFor="let reference of references">
+                    <td class="col-md-1">{{ reference.referenceRef }}</td>
+                    <td class="col-md-2">{{ reference.referenceTitre }}</td>
+                    <td class="col-md-2">{{ reference.clientId }}</td>
+                    <td class="col-md-2">{{ reference.referenceDateDemarrage }}</td>
+                    <td class="col-md-2">{{ reference.referenceDateAchevement }}</td>
+
+                    <td class="actions-column">
+                      <div class="actions-buttons">
+                        <a [routerLink]="['/reference-details', reference.referenceID]" class="btn btn-info btn-sm"
+                          title="Cliquez ici pour voir détail">
+                          <i class="fas fa-eye"></i>
+                        </a>
+                        <a *ngIf="isAdmin" [routerLink]="['/putReference', reference.referenceID]"
+                          title="Cliquez ici pour modifier">
+                          <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                        </a>
+                        <button *ngIf="isAdmin" class="btn btn-danger btn-sm" title="Cliquez ici pour supprimer"
+                          (click)="deleteReference(reference.referenceID)">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                        <button class="btn btn-success btn-sm" (click)="generatePdf(reference.referenceID)"
+                          title="Cliquez ici pour rapport">
+                          <i class="far fa-file-pdf"></i>
+                        </button>
+                        <button class="btn btn-primary btn-sm" (click)="generateWord(reference.referenceID)"
+                          title="Cliquez ici pour rapport Word">
+                          <i class="far fa-file-word"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-between p-2">
+                <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="collectionSize"
+                  (pageChange)="onPageChange()">
+                </ngb-pagination>
+                <select class="form-select" style="width: auto" [(ngModel)]="pageSize"
+                  (ngModelChange)="refreshReferences()">
+                  <option [ngValue]="10">10</option>
+                  <option [ngValue]="15">15</option>
+                  <option [ngValue]="20">20</option>
+                </select>
+              </div>
+            </div>
+            <ng-template #noReferences>
+              <p>Aucun référence n'a été trouvée.</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

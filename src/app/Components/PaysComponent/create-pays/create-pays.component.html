@@ -1,0 +1,68 @@
+<app-sidebar></app-sidebar>
+
+<div class="content-page">
+  <!-- Start Content-->
+  <div class="container">
+
+    <!-- start page title -->
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item"><a href="javascript: void(0);">Xtensus</a></li>
+              <li class="breadcrumb-item"><a href="javascript: void(0);">Ajouter</a></li>
+              <li class="breadcrumb-item active">Pays</li>
+            </ol>
+          </div>
+          <h4 class="page-title">Pays</h4>
+        </div>
+      </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-box">
+          <div class="row">
+            <form (ngSubmit)="onSubmit()" class="form-horizontal col-md-12">
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label">Pays <span class="text-danger">*</span></label>
+                <div class="col-md-10">
+                  <input type="text" class="form-control" [(ngModel)]="newPays.paysLibelle" name="paysLibelle" maxlength="254">
+                  <div *ngIf="formSubmitted && !newPays.paysLibelle" class="text-danger">Ce champ est requis.</div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label">Capitale <span class="text-danger">*</span></label>
+                <div class="col-md-10">
+                  <input type="text" class="form-control" [(ngModel)]="newPays.paysCapitale" name="paysCapitale" >
+                  <div *ngIf="formSubmitted && !newPays.paysCapitale" class="text-danger">Ce champ est requis.</div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="continentId">Continent <span class="text-danger">*</span></label>
+                <div class="col-md-10">
+                  <select class="form-control" id="continentId" [(ngModel)]="newPays.continentId" name="continentId" required>
+                    <option value="" disabled selected>Sélectionner un continent</option>
+                    <option *ngFor="let continent of continents" [value]="continent.continentId">{{ continent.continentName }}</option>
+                  </select>
+                  <div *ngIf="formSubmitted && !newPays.continentId" class="text-danger">Ce champ est requis.</div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-10 offset-md-2">
+                  <button class="btn width-md btn-bordered margin-btn btn-success waves-effect waves-light me-2" type="submit">Ajouter</button>
+                  <a [routerLink]="['/getPays']">
+                    <button type="button" class="btn btn-danger text-left btn-ml">Retour</button>
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end container-fluid -->
+</div>

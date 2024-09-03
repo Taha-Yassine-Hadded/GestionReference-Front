@@ -1,0 +1,15 @@
+.btn-background{
+    background-color:#F58C30 !important ;
+    border-color: #F58C30 !important;
+}
+.flex{
+    display: flex;
+}
+.btn-ml{
+    margin-left: 20px;
+}
+.content-page {
+    position: relative;
+    z-index: 1; /* Assurez-vous que le contenu passe au-dessus du footer */
+    /* Autres styles CSS pour votre contenu principal */
+  }
